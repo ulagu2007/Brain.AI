@@ -1,55 +1,18 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <title>Brain AI Animation</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brain AI | AI-Powered Presentations</title>
+    
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap" rel="stylesheet">
+
     <style>
-        /* Brain Nerves Animation */
-        @keyframes assembleNerves {
-            0% {
-                stroke-dasharray: 0, 1000;
-                transform: scale(1);
-            }
-            100% {
-                stroke-dasharray: 1000, 0;
-                transform: scale(1.1);
-            }
-        }
-
-        /* Glow Effect on Text */
-        @keyframes textGlow {
-            0%, 100% { text-shadow: 0 0 10px #00FFFF, 0 0 20px #00FFFF; }
-            50% { text-shadow: 0 0 15px #00FFFF, 0 0 30px #00FFFF; }
-        }
-
-        /* Text Scale-In Animation */
-        @keyframes scaleText {
-            0% { transform: scale(0); opacity: 0; }
-            100% { transform: scale(1); opacity: 1; }
-        }
-
-        /* Brain Outline Expansion */
-        @keyframes expandBrain {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-        }
-
-        /* Apply to Elements */
-        .brain-outline {
-            stroke: white;
-            stroke-width: 2;
-            fill: none;
-            animation: assembleNerves 5s linear forwards, expandBrain 3s infinite alternate;
-        }
-
-        .text-attractive {
-            font-family: 'Orbitron', sans-serif;
-            font-weight: bold;
-            animation: textGlow 2s infinite alternate, scaleText 2s ease-out;
-            color: #00FFFF;
-            font-size: 6rem;
-        }
-
+        /* Background Styling */
         .background-container {
             position: fixed;
             top: 0;
@@ -57,22 +20,132 @@
             width: 100%;
             height: 100%;
             z-index: -1;
-            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
+        /* Brain Image Animation - Moves from Outside to Center */
         .background-image {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
+            width: 90vw; /* Large size for dramatic entrance */
+            max-width: 650px;
+            height: auto;
+            opacity: 0.5; /* Keeps the background effect */
+            filter: blur(2px); /* Slight blur effect */
+            position: fixed;
+            top: -100%; /* Start completely off-screen */
+            left: 50%;
+            transform: translate(-50%, 0) scale(1.4);
+            animation: slideIn 2s ease-out forwards;
+        }
+
+        /* Animation for brain sliding in */
+        @keyframes slideIn {
+            0% {
+                top: -100%; /* Start off-screen */
+                transform: translate(-50%, 0) scale(1);
+                opacity: 0;
+            }
+            100% {
+                top: 50%; /* End at the center */
+                transform: translate(-50%, -50%) scale(1.2);
+                opacity: 1;
+            }
+        }
+
+        /* Brain.AI Text Styling - Moves from Bottom to Center */
+        .text-brain {
+            font-family: 'Orbitron', sans-serif;
+            font-weight: bold;
+            color: #00FFFF;
+            font-size: 5rem;
+            text-shadow: 0 0 25px rgba(0, 255, 255, 0.9);
+            position: absolute;
+            right: 15%;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 1; /* Ensures it stays above the brain image */
+            opacity: 0;
+            animation: slideUp 2s ease-out 1.5s forwards;
+        }
+
+        /* Animation for "Brain.AI" Text Moving Up */
+        @keyframes slideUp {
+            0% {
+                top: 100%; /* Start below the screen */
+                opacity: 0;
+            }
+            100% {
+                top: 50%; /* Move to the center */
+                transform: translateY(-50%);
+                opacity: 1;
+            }
+        }
+
+        /* Left Side Text (Moved Higher) */
+        .ready-text {
+            position: absolute;
+            left: 5%;
+            top: 10%; /* Adjusted from 15% to 10% */
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2rem;
+            color: white;
+            opacity: 0.9;
+            animation: fadeIn 2s ease-in-out;
+        }
+
+        /* Button Styling */
+        .next-btn {
+            position: absolute;
+            left: 5%;
+            bottom: 15%;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: white;
+            text-decoration: none;
+            border: 2px solid #00FFFF;
+            padding: 12px 24px;
+            border-radius: 50px;
+            transition: 0.3s;
+            backdrop-filter: blur(10px);
+            z-index: 2;
+        }
+
+        .next-btn:hover {
+            background: #00FFFF;
+            color: black;
+            transform: scale(1.08);
+        }
+
+        /* Smooth Fade-in Animation */
+        @keyframes fadeIn {
+            0% { opacity: 0; transform: translateY(-10px); }
+            100% { opacity: 1; transform: translateY(0); }
         }
     </style>
 </head>
+
 <body class="bg-black flex items-center justify-center min-h-screen relative">
+    
+    <!-- Enlarged Brain Image as Background -->
     <div class="background-container">
-        <img alt="White side view icon of a human brain on a black background" class="background-image" 
+        <img alt="Brain AI Background" class="background-image" 
         src="https://storage.googleapis.com/a1aa/image/xdIYfrvDiaxvJnxTEVQb6kYLYIHMsyaQ5qtsnglSkSg.jpg"/>
     </div>
 
-    <h1 class="text-attractive absolute">Brain.AI</h1>
+    <!-- Left Side Text (Now Positioned Higher) -->
+    <h2 class="ready-text">Ready to Make PowerPoints?</h2>
+
+    <!-- Right Side Brain AI Text (Now Moves from Bottom to Center) -->
+    <h1 class="text-brain">Brain.AI</h1>
+
+    <!-- Next Page Button -->
+    <a href="nextpage.html" class="next-btn">
+        Next → 
+    </a>
+
 </body>
 </html>
