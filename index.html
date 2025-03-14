@@ -4,19 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Brain.AI</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            margin: 50px;
-        }
-        h1 {
-            color: #333;
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <h1>Welcome to Brain.AI</h1>
-    <p>This is a basic website hosted on GitHub Pages.</p>
+    <p>Enter a topic to generate a PowerPoint presentation.</p>
+    
+    <form id="pptForm">
+        <input type="text" id="topic" placeholder="Enter topic" required>
+        <button type="submit">Generate PPT</button>
+    </form>
+
+    <p id="result"></p>
+
+    <script src="script.js"></script>
 </body>
 </html>
