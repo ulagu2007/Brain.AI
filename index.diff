@@ -3,17 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Brain.AI - AI PPT Maker</title>
+    <title>Brain.AI</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <h1>Welcome to Brain.AI</h1>
-    <p>Generate AI-powered presentations easily!</p>
+    <p>Enter a topic to generate a PowerPoint presentation.</p>
+    
     <form id="pptForm">
-        <input type="text" id="topic" placeholder="Enter topic">
+        <input type="text" id="topic" placeholder="Enter topic" required>
         <button type="submit">Generate PPT</button>
     </form>
+
     <p id="result"></p>
+
     <script src="script.js"></script>
 </body>
 </html>
