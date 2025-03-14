@@ -1,25 +1,78 @@
-<!DOCTYPE html> 
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Brain.AI</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Brain AI Animation</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap" rel="stylesheet">
+    <style>
+        /* Brain Nerves Animation */
+        @keyframes assembleNerves {
+            0% {
+                stroke-dasharray: 0, 1000;
+                transform: scale(1);
+            }
+            100% {
+                stroke-dasharray: 1000, 0;
+                transform: scale(1.1);
+            }
+        }
+
+        /* Glow Effect on Text */
+        @keyframes textGlow {
+            0%, 100% { text-shadow: 0 0 10px #00FFFF, 0 0 20px #00FFFF; }
+            50% { text-shadow: 0 0 15px #00FFFF, 0 0 30px #00FFFF; }
+        }
+
+        /* Text Scale-In Animation */
+        @keyframes scaleText {
+            0% { transform: scale(0); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        /* Brain Outline Expansion */
+        @keyframes expandBrain {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        /* Apply to Elements */
+        .brain-outline {
+            stroke: white;
+            stroke-width: 2;
+            fill: none;
+            animation: assembleNerves 5s linear forwards, expandBrain 3s infinite alternate;
+        }
+
+        .text-attractive {
+            font-family: 'Orbitron', sans-serif;
+            font-weight: bold;
+            animation: textGlow 2s infinite alternate, scaleText 2s ease-out;
+            color: #00FFFF;
+            font-size: 6rem;
+        }
+
+        .background-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .background-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    </style>
 </head>
-<body>
-    <!-- Logo at the top -->
-    <img src="images/logo.png" alt="Brain.AI Logo" width="150">
+<body class="bg-black flex items-center justify-center min-h-screen relative">
+    <div class="background-container">
+        <img alt="White side view icon of a human brain on a black background" class="background-image" 
+        src="https://storage.googleapis.com/a1aa/image/xdIYfrvDiaxvJnxTEVQb6kYLYIHMsyaQ5qtsnglSkSg.jpg"/>
+    </div>
 
-    <h1>Welcome to Brain.AI</h1>
-    <p>Enter a topic to generate a PowerPoint presentation.</p>
-    
-    <form id="pptForm">
-        <input type="text" id="topic" placeholder="Enter topic" required>
-        <button type="submit">Generate PPT</button>
-    </form>
-
-    <p id="result"></p>
-
-    <script src="script.js"></script>
+    <h1 class="text-attractive absolute">Brain.AI</h1>
 </body>
 </html>
