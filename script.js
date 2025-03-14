@@ -13,8 +13,21 @@ document.getElementById("pptForm").addEventListener("submit", async function(eve
             body: JSON.stringify({ topic })
         });
 
-        let data = await response.json();
-        result.textContent = data.message;
+        if (!response.ok) {
+            throw new Error("Failed to generate PPT");
+        }
+
+        // Create a temporary download link
+        let blob = await response.blob();
+        let url = window.URL.createObjectURL(blob);
+        let a = document.createElement("a");
+        a.href = url;
+        a.download = `${topic.replace(' ', '_')}.pptx`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+
+        result.textContent = "Download complete!";
     } catch (error) {
         result.textContent = "Error generating PPT.";
     }
