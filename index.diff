@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Brain.AI</title>
+    <title>Brain.AI - AI-powered PPT Generator</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -16,6 +16,9 @@
     </form>
 
     <p id="result"></p>
+
+    <!-- Loader for better UI experience -->
+    <div id="loader" style="display: none;">Generating PPT...</div>
 
     <script src="script.js"></script>
 </body>
