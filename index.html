@@ -23,6 +23,7 @@
             justify-content: center;
             align-items: center;
             background: linear-gradient(135deg, #1f1c2c, #928dab);
+            overflow: hidden;
         }
 
         /* Brain Image - Now with a Glowing Effect */
@@ -35,7 +36,7 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%) scale(1.2);
-            animation: pulseGlow 3s infinite alternate ease-in-out;
+            animation: pulseGlow 3s infinite alternate ease-in-out, scaleUp 3s infinite alternate ease-in-out;
             filter: drop-shadow(0 0 20px rgba(0, 255, 255, 0.8));
         }
 
@@ -43,6 +44,12 @@
         @keyframes pulseGlow {
             0% { filter: drop-shadow(0 0 10px rgba(0, 255, 255, 0.5)); }
             100% { filter: drop-shadow(0 0 25px rgba(0, 255, 255, 1)); }
+        }
+
+        /* Animation for scaling brain effect */
+        @keyframes scaleUp {
+            0% { transform: translate(-50%, -50%) scale(0.8); }
+            100% { transform: translate(-50%, -50%) scale(1.2); }
         }
 
         /* Brain.AI Text - Now Exactly in the Center */
