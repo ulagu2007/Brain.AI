@@ -3,8 +3,10 @@ document.getElementById("pptForm").addEventListener("submit", async function(eve
     
     let topic = document.getElementById("topic").value;
     let result = document.getElementById("result");
+    let loader = document.getElementById("loader");
 
-    result.textContent = "Generating...";
+    result.textContent = "";
+    loader.style.display = "block"; // Show loader
 
     try {
         let response = await fetch("/generate", {
@@ -17,7 +19,8 @@ document.getElementById("pptForm").addEventListener("submit", async function(eve
             throw new Error("Failed to generate PPT");
         }
 
-        // Create a temporary download link
+        // Hide loader and show download link
+        loader.style.display = "none";
         let blob = await response.blob();
         let url = window.URL.createObjectURL(blob);
         let a = document.createElement("a");
@@ -29,6 +32,7 @@ document.getElementById("pptForm").addEventListener("submit", async function(eve
 
         result.textContent = "Download complete!";
     } catch (error) {
+        loader.style.display = "none";
         result.textContent = "Error generating PPT.";
     }
 });
