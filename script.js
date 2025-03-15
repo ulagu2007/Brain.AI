@@ -1,38 +1,41 @@
-document.getElementById("pptForm").addEventListener("submit", async function(event) {
+const API_BASE_URL = "http://127.0.0.1:5000";
+
+document.getElementById("pptForm").addEventListener("submit", async function (event) {
     event.preventDefault();
-    
-    let topic = document.getElementById("topic").value;
-    let result = document.getElementById("result");
-    let loader = document.getElementById("loader");
+    const topic = document.getElementById("topic").value;
 
-    result.textContent = "";
-    loader.style.display = "block"; // Show loader
+    const response = await fetch(`${API_BASE_URL}/generate-ppt`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": "Bearer YOUR_TOKEN"
+        },
+        body: JSON.stringify({ topic: topic })
+    });
 
-    try {
-        let response = await fetch("/generate", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ topic })
-        });
-
-        if (!response.ok) {
-            throw new Error("Failed to generate PPT");
-        }
-
-        // Hide loader and show download link
-        loader.style.display = "none";
-        let blob = await response.blob();
-        let url = window.URL.createObjectURL(blob);
-        let a = document.createElement("a");
+    if (response.ok) {
+        const blob = await response.blob();
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement("a");
         a.href = url;
-        a.download = `${topic.replace(' ', '_')}.pptx`;
+        a.download = `${topic}.pptx`;
         document.body.appendChild(a);
         a.click();
         document.body.removeChild(a);
-
-        result.textContent = "Download complete!";
-    } catch (error) {
-        loader.style.display = "none";
-        result.textContent = "Error generating PPT.";
+    } else {
+        alert("Error generating PPT");
     }
 });
+
+// Function to toggle dropdown
+function toggleDropdown() {
+    var menu = document.getElementById("dropdownMenu");
+    menu.style.display = (menu.style.display === "block") ? "none" : "block";
+}
+
+// Function to toggle history panel
+function toggleHistory() {
+    var panel = document.getElementById("historyPanel");
+    panel.style.right = (panel.style.right === "0px") ? "-250px" : "0px";
+}
+
