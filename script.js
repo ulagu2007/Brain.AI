@@ -1,10 +1,10 @@
-const API_BASE_URL = "https://brainai-backend.onrender.com"; // Replace with your Render backend URL
+const API_BASE_URL = "https://brain-ai-p61f.onrender.com"; // Your actual backend URL
 
 document.getElementById("pptForm").addEventListener("submit", async function (event) {
     event.preventDefault();
     const topic = document.getElementById("topic").value;
 
-    const response = await fetch(`${API_BASE_URL}/generate`, { // Fix API route
+    const response = await fetch(`${API_BASE_URL}/generate`, { // Updated API route
         method: "POST",
         headers: {
             "Content-Type": "application/json"
