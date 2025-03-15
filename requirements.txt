@@ -1,1 +1,5 @@
-Flask
+flask
+python-pptx
+openai
+flask-cors
+
