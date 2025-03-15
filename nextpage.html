@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brain AI | Create Presentation</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            background: radial-gradient(circle, rgba(0, 0, 0, 0.8) 10%, black 90%);
+            font-family: 'Orbitron', sans-serif;
+            color: white;
+            text-align: center;
+        }
+
+        /* Heading Style */
+        h1 {
+            font-size: 3rem;
+            color: #00FFFF;
+            text-shadow: 0 0 15px rgba(0, 255, 255, 1);
+            margin-top: 50px;
+        }
+
+        /* Input Box */
+        .input-box {
+            width: 80%;
+            max-width: 500px;
+            padding: 15px;
+            margin: 20px auto;
+            font-size: 1.2rem;
+            border: 2px solid #00FFFF;
+            border-radius: 8px;
+            background: rgba(0, 0, 0, 0.6);
+            color: white;
+            outline: none;
+            text-align: center;
+        }
+
+        /* Generate Button */
+        .generate-btn {
+            background: #00FFFF;
+            color: black;
+            font-size: 1.5rem;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: 0.3s;
+        }
+
+        .generate-btn:hover {
+            background: white;
+            color: black;
+            transform: scale(1.08);
+        }
+
+        /* Back Button */
+        .back-btn {
+            display: inline-block;
+            margin-top: 30px;
+            color: white;
+            text-decoration: none;
+            font-size: 1.2rem;
+            border: 2px solid #00FFFF;
+            padding: 10px 20px;
+            border-radius: 50px;
+            transition: 0.3s;
+        }
+
+        .back-btn:hover {
+            background: #00FFFF;
+            color: black;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Page Heading -->
+    <h1>Generate AI-Powered Presentations</h1>
+
+    <!-- Topic Input -->
+    <input type="text" class="input-box" id="topicInput" placeholder="Enter Topic (e.g., AI in Healthcare)">
+
+    <!-- Generate Button -->
+    <button class="generate-btn" onclick="generatePresentation()">Generate</button>
+
+    <!-- Back Button -->
+    <br>
+    <a href="index.html" class="back-btn">← Back</a>
+
+    <!-- JavaScript -->
+    <script>
+        function generatePresentation() {
+            let topic = document.getElementById("topicInput").value;
+            if (topic.trim() === "") {
+                alert("Please enter a topic!");
+                return;
+            }
+            window.location.href = `generate.html?topic=${encodeURIComponent(topic)}`;
+        }
+    </script>
+
+</body>
+</html>
