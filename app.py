@@ -9,14 +9,16 @@ from flask_jwt_extended import JWTManager, create_access_token, jwt_required, ge
 from werkzeug.utils import secure_filename
 
 app = Flask(__name__)
-CORS(app)
 
-# OpenAI API Key (Replace with your key)
-openai.api_key = "your-api-key"
+# Allow only GitHub Pages frontend to connect
+CORS(app, resources={r"/*": {"origins": "https://ulagu2007.github.io"}})
+
+# OpenAI API Key from environment variable (Replace in Render)
+openai.api_key = os.getenv("OPENAI_API_KEY")
 
 # Configurations
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///users.db"
-app.config["JWT_SECRET_KEY"] = "super-secret-key"
+app.config["JWT_SECRET_KEY"] = os.getenv("JWT_SECRET_KEY", "super-secret-key")  # Use env variable in Render
 app.config["UPLOAD_FOLDER"] = "generated_ppts"
 
 # Create Upload Folder
@@ -89,7 +91,7 @@ def login():
         return jsonify({"message": "Login successful!", "token": access_token})
     return jsonify({"error": "Invalid credentials"}), 401
 
-@app.route("/generate-ppt", methods=["POST"])
+@app.route("/generate", methods=["POST"])  # 🔥 Fixed API route
 @jwt_required()
 def generate_ppt_api():
     data = request.json
@@ -115,6 +117,4 @@ def get_history():
     return jsonify([{"topic": h.topic, "filename": h.filename} for h in history])
 
 if __name__ == "__main__":
-    with app.app_context():
-        db.create_all()
     app.run(debug=True)
