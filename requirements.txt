@@ -1,5 +1,8 @@
 flask
 python-pptx
 openai
+flask-sqlalchemy
+flask-bcrypt
 flask-cors
-
+flask-jwt-extended
+werkzeug
