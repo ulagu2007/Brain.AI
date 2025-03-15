@@ -1,95 +1,73 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Brain AI | AI-Powered Presentations</title>
-    
+
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    
+
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap" rel="stylesheet">
 
     <style>
-        /* Background Styling */
-        .background-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background: linear-gradient(135deg, #1f1c2c, #928dab);
+        /* Background Gradient */
+        body {
+            background: radial-gradient(circle, rgba(0, 0, 0, 0.8) 10%, black 90%);
             overflow: hidden;
         }
 
-        /* Brain Image - Now with a Glowing Effect */
-        .background-image {
-            width: 80vw;
-            max-width: 700px;
-            height: auto;
-            opacity: 0.9;
+        /* Brain Image */
+        .background-container {
             position: fixed;
             top: 50%;
             left: 50%;
-            transform: translate(-50%, -50%) scale(1.2);
-            animation: pulseGlow 3s infinite alternate ease-in-out, scaleUp 3s infinite alternate ease-in-out;
-            filter: drop-shadow(0 0 20px rgba(0, 255, 255, 0.8));
+            transform: translate(-50%, -50%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: -1;
         }
 
-        /* Animation for glowing brain effect */
-        @keyframes pulseGlow {
-            0% { filter: drop-shadow(0 0 10px rgba(0, 255, 255, 0.5)); }
-            100% { filter: drop-shadow(0 0 25px rgba(0, 255, 255, 1)); }
+        .background-image {
+            width: 70vw;
+            max-width: 650px;
+            height: auto;
+            opacity: 0.9;
+            filter: drop-shadow(0 0 20px rgba(0, 255, 255, 1));
         }
 
-        /* Animation for scaling brain effect */
-        @keyframes scaleUp {
-            0% { transform: translate(-50%, -50%) scale(0.8); }
-            100% { transform: translate(-50%, -50%) scale(1.2); }
-        }
-
-        /* Brain.AI Text - Now Exactly in the Center */
+        /* Brain.AI Text */
         .text-brain {
             font-family: 'Orbitron', sans-serif;
             font-weight: bold;
             color: #00FFFF;
-            font-size: 6rem; /* Increased font size */
-            text-shadow: 0 0 5px rgba(0, 255, 255, 0.7), 0 0 10px rgba(0, 255, 255, 0.7), 0 0 15px rgba(0, 255, 255, 0.7);
+            font-size: 4rem;
+            text-shadow: 0 0 30px rgba(0, 255, 255, 1);
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
             z-index: 10;
-            opacity: 0;
-            animation: fadeIn 2s ease-out 1.5s forwards;
-            letter-spacing: -2px; /* Contracted letter spacing */
         }
 
-        /* Left Side Text (Higher Position) */
+        /* Left Side Text */
         .ready-text {
             position: absolute;
             left: 5%;
-            top: 8%;
+            top: 10%;
             font-family: 'Orbitron', sans-serif;
             font-size: 2rem;
             color: white;
-            opacity: 0.9;
-            animation: fadeIn 2s ease-in-out;
             z-index: 10;
         }
 
-        /* Button Styling */
+        /* Next Button */
         .next-btn {
             position: absolute;
             left: 5%;
             bottom: 15%;
-            display: flex;
-            align-items: center;
-            gap: 10px;
             font-size: 1.2rem;
             font-weight: bold;
             color: white;
@@ -154,17 +132,72 @@
             background: rgba(0, 255, 255, 0.2);
         }
 
-        /* Smooth Fade-in Animation */
-        @keyframes fadeIn {
-            0% { opacity: 0; transform: translateY(-10px); }
-            100% { opacity: 1; transform: translateY(0); }
+        /* History Panel */
+        .history-panel {
+            position: fixed;
+            top: 50%;
+            right: -250px;
+            width: 250px;
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 20px;
+            border-radius: 10px 0 0 10px;
+            box-shadow: -5px 0 10px rgba(0, 255, 255, 0.5);
+            transform: translateY(-50%);
+            transition: right 0.3s ease-in-out;
+            z-index: 15;
+        }
+
+        .history-panel h2 {
+            font-size: 1.4rem;
+            border-bottom: 2px solid #00FFFF;
+            padding-bottom: 5px;
+            margin-bottom: 10px;
+        }
+
+        .history-list {
+            font-size: 1rem;
+            list-style: none;
+            padding: 0;
+        }
+
+        .history-list li {
+            padding: 10px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .toggle-history {
+            position: absolute;
+            top: 50%;
+            right: 0;
+            background: #00FFFF;
+            color: black;
+            font-size: 1.2rem;
+            padding: 10px;
+            border-radius: 10px 0 0 10px;
+            cursor: pointer;
+            transform: translateY(-50%);
+            z-index: 16;
+        }
+
+        /* Particle Background */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
         }
     </style>
 </head>
 
 <body class="bg-black flex items-center justify-center min-h-screen relative">
     
-    <!-- Profile Picture (Top Right) -->
+    <!-- Particle Background -->
+    <canvas class="particles"></canvas>
+
+    <!-- Profile Picture -->
     <div class="profile-container" onclick="toggleDropdown()">
         <img src="https://www.w3schools.com/howto/img_avatar.png" alt="Profile" class="profile-icon">
     </div>
@@ -176,39 +209,76 @@
         <a href="#">Saved Files</a>
     </div>
 
-    <!-- Glowing Brain Image -->
+    <!-- Brain Image with Centered Text -->
     <div class="background-container">
         <img alt="Brain AI Background" class="background-image" 
         src="https://storage.googleapis.com/a1aa/image/xdIYfrvDiaxvJnxTEVQb6kYLYIHMsyaQ5qtsnglSkSg.jpg"/>
+        <h1 class="text-brain">Brain.AI</h1> 
     </div>
 
     <!-- Left Side Text -->
     <h2 class="ready-text">Ready to Make PowerPoints?</h2>
 
-    <!-- Centered Brain.AI Text (Now Inside the Brain) -->
-    <h1 class="text-brain">Brain.AI</h1>
-
     <!-- Next Page Button -->
-    <a href="nextpage.html" class="next-btn">
-        Next → 
-    </a>
+    <a href="nextpage.html" class="next-btn">Next →</a>
 
-    <!-- JavaScript for Dropdown -->
+    <!-- User History Panel -->
+    <div class="history-panel" id="historyPanel">
+        <h2>User History</h2>
+        <ul class="history-list">
+            <li><strong>Yesterday:</strong> Created "AI in Healthcare" PPT</li>
+            <li><strong>Last Week:</strong> Created "Future of Robotics" PPT</li>
+            <li><strong>Last Month:</strong> Created "Quantum Computing" PPT</li>
+        </ul>
+    </div>
+    <div class="toggle-history" onclick="toggleHistory()">❯</div>
+
+    <!-- JavaScript for Moving Particles -->
     <script>
-        function toggleDropdown() {
-            var menu = document.getElementById("dropdownMenu");
-            if (menu.style.display === "block") {
-                menu.style.opacity = "0";
-                menu.style.transform = "translateY(-10px)";
-                setTimeout(() => { menu.style.display = "none"; }, 300);
-            } else {
-                menu.style.display = "block";
-                setTimeout(() => {
-                    menu.style.opacity = "1";
-                    menu.style.transform = "translateY(0)";
-                }, 10);
+        const canvas = document.querySelector('.particles');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        let particlesArray = [];
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 2 + 0.5;
+                this.speedX = Math.random() * 1 - 0.5;
+                this.speedY = Math.random() * 1 - 0.5;
+            }
+
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+                if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
+                if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
+            }
+
+            draw() {
+                ctx.fillStyle = "white";
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
             }
         }
+
+        function createParticles() {
+            for (let i = 0; i < 250; i++) {
+                particlesArray.push(new Particle());
+            }
+        }
+
+        function animateParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particlesArray.forEach(p => { p.update(); p.draw(); });
+            requestAnimationFrame(animateParticles);
+        }
+
+        createParticles();
+        animateParticles();
     </script>
 
 </body>
