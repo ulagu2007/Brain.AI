@@ -1,14 +1,13 @@
-const API_BASE_URL = "http://127.0.0.1:5000";
+const API_BASE_URL = "https://brainai-backend.onrender.com"; // Replace with your Render backend URL
 
 document.getElementById("pptForm").addEventListener("submit", async function (event) {
     event.preventDefault();
     const topic = document.getElementById("topic").value;
 
-    const response = await fetch(`${API_BASE_URL}/generate-ppt`, {
+    const response = await fetch(`${API_BASE_URL}/generate`, { // Fix API route
         method: "POST",
         headers: {
-            "Content-Type": "application/json",
-            "Authorization": "Bearer YOUR_TOKEN"
+            "Content-Type": "application/json"
         },
         body: JSON.stringify({ topic: topic })
     });
@@ -38,4 +37,3 @@ function toggleHistory() {
     var panel = document.getElementById("historyPanel");
     panel.style.right = (panel.style.right === "0px") ? "-250px" : "0px";
 }
-
